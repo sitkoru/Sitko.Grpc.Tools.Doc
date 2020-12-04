@@ -10,20 +10,14 @@ jobs:
     build:
         runs-on: ubuntu-latest
         container: ghcr.io/sitkoru/actions-container
-        env:
-            GRPC_VERSION: v1.34.x
         steps:
             -   uses: actions/checkout@v2
             -   uses: actions/setup-dotnet@v1
                 with:
                     dotnet-version: '5.0.x'
-            
-            -   name: Copy gRPC files to project dir
-                working-directory: tmp/grpc
+            -   name: Download protoc and protoc-doc-gen
+                working-directory: build
                 run: |
-                    cp bins/opt/grpc_php_plugin ../../src/Sitko.Grpc.Tools.Php/Tools/grpc_php_plugin
-                    cp bins/opt/protobuf/protoc ../../src/Sitko.Grpc.Tools.Php/Tools/protoc
-                    mkdir -p ../../src/Sitko.Grpc.Tools.Php/Proto/google/protobuf
-                    cp third_party/protobuf/src/google/protobuf/*.proto ../../src/Sitko.Grpc.Tools.Php/Proto/google/protobuf
+                    ./build.sh
             -   name: Create package
                 run: dotnet pack -c Release
