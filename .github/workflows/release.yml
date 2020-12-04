@@ -21,9 +21,9 @@ jobs:
                 with:
                     dotnet-version: '5.0.x'
             -   name: Download protoc and protoc-doc-gen
-                    working-directory: build
-                    run: |
-                        ./build.sh
+                working-directory: build
+                run: |
+                    ./build.sh
             -   name: Pack library
                 run: dotnet pack -c Release /p:Version=${{ steps.prep.outputs.version }} -o packages
             -   name: Publish nuget package
