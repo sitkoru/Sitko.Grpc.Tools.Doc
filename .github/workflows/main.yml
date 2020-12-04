@@ -18,6 +18,7 @@ jobs:
             -   name: Download protoc and protoc-doc-gen
                 working-directory: build
                 run: |
-                    ./build.sh
+                    chmod +x download.sh
+                    ./download.sh
             -   name: Create package
                 run: dotnet pack -c Release

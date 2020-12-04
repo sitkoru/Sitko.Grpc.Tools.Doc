@@ -23,7 +23,8 @@ jobs:
             -   name: Download protoc and protoc-doc-gen
                 working-directory: build
                 run: |
-                    ./build.sh
+                    chmod +x download.sh
+                    ./download.sh
             -   name: Pack library
                 run: dotnet pack -c Release /p:Version=${{ steps.prep.outputs.version }} -o packages
             -   name: Publish nuget package
