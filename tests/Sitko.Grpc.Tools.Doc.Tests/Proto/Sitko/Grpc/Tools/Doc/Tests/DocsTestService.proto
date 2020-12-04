@@ -1,0 +1,11 @@
+﻿syntax = "proto3";
+
+import "Sitko/Grpc/Tools/Doc/Tests/FooRequestMsg.proto";
+import "Sitko/Grpc/Tools/Doc/Tests/FooResponseMsg.proto";
+
+package Sitko.Grpc.Tools.Doc.Tests;
+
+service AccountingService {
+    rpc FooMethod (FooRequestMsg) returns (FooResponseMsg){
+    }
+}

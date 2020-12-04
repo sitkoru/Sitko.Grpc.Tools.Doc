@@ -1,0 +1,9 @@
+﻿syntax = "proto3";
+
+import "Sitko/Core/Grpc/ApiResponseInfo.proto";
+
+package Sitko.Grpc.Tools.Doc.Tests;
+
+message FooResponseMsg {
+    Sitko.Core.Grpc.ApiResponseInfo ResponseInfo = 1;
+}

@@ -1,0 +1,12 @@
+﻿syntax = "proto3";
+
+import "Sitko/Core/Grpc/ApiRequestInfo.proto";
+import "google/protobuf/timestamp.proto";
+
+package Sitko.Grpc.Tools.Doc.Tests;
+
+message FooRequestMsg {
+    Sitko.Core.Grpc.ApiRequestInfo RequestInfo = 1;
+    string Bar = 2; // Bar field
+    google.protobuf.Timestamp Date = 3; // Date field
+}

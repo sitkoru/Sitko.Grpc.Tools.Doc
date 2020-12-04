@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <_DocCompile_MsBuildAssembly>..\bin\Debug\netstandard2.1\Sitko.Grpc.Tools.Doc.dll</_DocCompile_MsBuildAssembly>
+    <PROTODOC_PackagedToolsPath>$( [System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)../Tools) )</PROTODOC_PackagedToolsPath>
+  </PropertyGroup>
+
+  <UsingTask TaskName="Sitko.Grpc.Tools.Doc.ProtoDocCompile" AssemblyFile="$(_DocCompile_MsBuildAssembly)"/>
+
+  <Target Name="ProtoDoc_ResolvePlatform">
+    <ProtoToolsPlatform>
+      <Output TaskParameter="Os" PropertyName="_ProtoDoc_ToolsOs"/>
+      <Output TaskParameter="Cpu" PropertyName="_ProtoDoc_ToolsCpu"/>
+    </ProtoToolsPlatform>
+
+    <PropertyGroup>
+      <!-- First try environment variable. -->
+      <ProtoDoc_ToolsOs Condition=" '$(ProtoDoc_ToolsOs)' == '' ">$(PROTODOC_TOOLS_OS)</ProtoDoc_ToolsOs>
+      <ProtoDoc_ToolsCpu Condition=" '$(ProtoDoc_ToolsCpu)' == '' ">$(PROTODOC_TOOLS_CPU)</ProtoDoc_ToolsCpu>
+      <ProtoDoc_ProtocFullPath Condition=" '$(ProtoDoc_ProtocFullPath)' == '' ">$(PROTODOC_PROTOC)</ProtoDoc_ProtocFullPath>
+      <ProtoDoc_ProtocGenDocFullPath Condition=" '$(ProtoDoc_ProtocGenDocFullPath)' == '' ">$(PROTODOC_PROTOCGENDOC)</ProtoDoc_ProtocGenDocFullPath>
+
+      <!-- Next try OS and CPU resolved by ProtoToolsPlatform. -->
+      <ProtoDoc_ToolsOs Condition=" '$(ProtoDoc_ToolsOs)' == '' ">$(_ProtoDoc_ToolsOs)</ProtoDoc_ToolsOs>
+      <ProtoDoc_ToolsCpu Condition=" '$(ProtoDoc_ToolsCpu)' == '' ">$(_ProtoDoc_ToolsCpu)</ProtoDoc_ToolsCpu>
+      <ProtoDoc_ProtocFullPath Condition=" '$(PROTODOC_ProtocFullPath)' == '' and '$(PROTODOC_ToolsOs)' == 'windows' ">$(PROTODOC_PackagedToolsPath)\$(PROTODOC_ToolsOs)_$(PROTODOC_ToolsCpu)\protoc.exe</ProtoDoc_ProtocFullPath>
+      <ProtoDoc_ProtocFullPath Condition=" '$(PROTODOC_ProtocFullPath)' == '' ">$(PROTODOC_PackagedToolsPath)/$(PROTODOC_ToolsOs)_$(PROTODOC_ToolsCpu)/protoc</ProtoDoc_ProtocFullPath>
+      <ProtoDoc_ProtocGenDocFullPath Condition=" '$(PROTODOC_ProtocGenDocFullPath)' == '' and '$(PROTODOC_ToolsOs)' == 'windows' ">$(PROTODOC_PackagedToolsPath)\$(PROTODOC_ToolsOs)_$(PROTODOC_ToolsCpu)\protoc-gen-doc.exe</ProtoDoc_ProtocGenDocFullPath>
+      <ProtoDoc_ProtocGenDocFullPath Condition=" '$(PROTODOC_ProtocGenDocFullPath)' == '' ">$(PROTODOC_PackagedToolsPath)/$(PROTODOC_ToolsOs)_$(PROTODOC_ToolsCpu)/protoc-gen-doc</ProtoDoc_ProtocGenDocFullPath>
+    </PropertyGroup>
+
+    <Error Condition=" '$(DisableProtobufDesignTimeBuild)' != 'true' and '$(PROTODOC_PROTOC)' == ''
+                        and ( '$(PROTODOC_ToolsOs)' == '' or '$(PROTODOC_ToolsCpu)' == '' ) "
+           Text="Google.Protobuf.Tools cannot determine host OS and CPU.&#10;Use environment variables PROTOBUF_TOOLS_OS={linux|macosx|windows} and PROTOBUF_TOOLS_CPU={x86|x64} to try the closest match to your system.&#10;You may also set PROTOBUF_PROTOC to specify full path to the host-provided compiler (v3.5+ is required)."/>
+  </Target>
+
+  <Target Name="ProtoDoc_SetOutputDir" Condition=" '@(Protobuf)' != '' " DependsOnTargets="ProtoDoc_ResolvePlatform;" AfterTargets="Build">
+    <PropertyGroup>
+      <ProtoDoc_OutputDir>%(Protobuf.DocOutputDir)</ProtoDoc_OutputDir>
+    </PropertyGroup>
+    <CallTarget Targets="ProtoDocCompile" Condition="  '$(ProtoDoc_OutputDir)' != '' "/>
+  </Target>
+
+
+  <Target Name="ProtoDocCompile">
+    <ItemGroup>
+      <ProtoDoc_Compile Include="@(Protobuf)"/>
+    </ItemGroup>
+    <PropertyGroup>
+      <ProtoDocCompile_StandardImportsPath>$( [System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)../Proto) )</ProtoDocCompile_StandardImportsPath>
+    </PropertyGroup>
+    <MakeDir Directories="%(Protobuf.DocOutputDir)"/>
+    <ProtoDocCompile
+      Protobuf="@(ProtoDoc_Compile)"
+      OutputDir="%(Protobuf.DocOutputDir)"
+      ProtoPath="%(Protobuf.AdditionalImportDirs);$(ProtoDocCompile_StandardImportsPath);%(Protobuf.ProtoRoot)"
+      ToolExe="$(ProtoDoc_ProtocFullPath)"
+      PluginExe="$(ProtoDoc_ProtocGenDocFullPath)"
+    />
+  </Target>
+</Project>

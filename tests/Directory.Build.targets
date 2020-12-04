@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\src\Sitko.Grpc.Tools.Doc\Build\Sitko.Grpc.Tools.Doc.targets" />
+</Project>
