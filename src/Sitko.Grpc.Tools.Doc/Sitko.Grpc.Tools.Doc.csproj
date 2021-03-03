@@ -23,7 +23,7 @@
     <None Pack="true" PackagePath="tools" Include="Tools/**/*.*;" />
     <None Pack="true" PackagePath="proto/google/protobuf" Include="Proto/google/protobuf/*.proto;" />
     <PackageReference Include="Microsoft.Build.Utilities.Core" Version="16.8.0" />
-    <PackageReference Include="Microsoft.Build.Framework" Version="16.8.0" />
+    <PackageReference Include="Microsoft.Build.Framework" Version="16.9.0" />
   </ItemGroup>
 
 </Project>
