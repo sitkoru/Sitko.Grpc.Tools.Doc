@@ -5,7 +5,7 @@
     </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Sitko.Core.Grpc" Version="6.4.0" GeneratePathProperty="true" />
+    <PackageReference Include="Sitko.Core.Grpc" Version="7.5.1" GeneratePathProperty="true" />
     <Protobuf Include="**/*.proto" DocOutputDir="docs" GrpcServices="Both" ProtoRoot="Proto" AdditionalImportDirs="$(PkgSitko_Core_Grpc)/protos" />
     <None Pack="true" PackagePath="protos" Include="Proto\**\*.proto" />
   </ItemGroup>
