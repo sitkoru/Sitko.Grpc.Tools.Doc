@@ -1,6 +1,6 @@
 # Sitko.Grpc.Tools.Doc
 
-![Nuget](https://img.shields.io/nuget/v/Sitko.Grpc.Tools.Doc)
+[![Nuget](https://img.shields.io/nuget/v/Sitko.Grpc.Tools.Doc)](https://www.nuget.org/packages/Sitko.Grpc.Tools.Doc/)
 
 MSBuild Target for generate documentation from gRPC
 
