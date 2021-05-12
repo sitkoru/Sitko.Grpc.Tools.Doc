@@ -21,4 +21,4 @@ jobs:
                     chmod +x download.sh
                     ./download.sh
             -   name: Create package
-                run: dotnet pack -c Release
+                run: dotnet pack -c Release src/Sitko.Grpc.Tools.Doc

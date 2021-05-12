@@ -2,8 +2,8 @@
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
-    <_DocCompile_MsBuildAssembly>..\bin\Debug\netstandard2.1\Sitko.Grpc.Tools.Doc.dll</_DocCompile_MsBuildAssembly>
-    <PROTODOC_PackagedToolsPath>$( [System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)../Tools) )</PROTODOC_PackagedToolsPath>
+    <_DocCompile_MsBuildAssembly>../lib/netstandard2.1/Sitko.Grpc.Tools.Doc.dll</_DocCompile_MsBuildAssembly>
+    <PROTODOC_PackagedToolsPath>$( [System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)../tools) )</PROTODOC_PackagedToolsPath>
   </PropertyGroup>
 
   <UsingTask TaskName="Sitko.Grpc.Tools.Doc.ProtoDocCompile" AssemblyFile="$(_DocCompile_MsBuildAssembly)"/>
@@ -48,7 +48,7 @@
       <ProtoDoc_Compile Include="@(Protobuf)"/>
     </ItemGroup>
     <PropertyGroup>
-      <ProtoDocCompile_StandardImportsPath>$( [System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)../Proto) )</ProtoDocCompile_StandardImportsPath>
+      <ProtoDocCompile_StandardImportsPath>$( [System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)../proto) )</ProtoDocCompile_StandardImportsPath>
     </PropertyGroup>
     <MakeDir Directories="%(Protobuf.DocOutputDir)"/>
     <ProtoDocCompile
