@@ -1,17 +1,20 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-    <PropertyGroup>
-        <TargetFramework>netstandard2.1</TargetFramework>
-    </PropertyGroup>
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Sitko.Core.Grpc" Version="7.23.0" GeneratePathProperty="true" />
-    <Protobuf Include="**/*.proto" DocOutputDir="docs" GrpcServices="Both" ProtoRoot="Proto" AdditionalImportDirs="$(PkgSitko_Core_Grpc)/protos" />
-    <None Pack="true" PackagePath="protos" Include="Proto\**\*.proto" />
+    <PackageReference Include="Sitko.Core.Xunit" Version="8.14.0"/>
   </ItemGroup>
-
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Sitko.Grpc.Tools.Doc\Sitko.Grpc.Tools.Doc.csproj" />
+    <Content Include="Proto\**">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Sitko.Grpc.Tools.Doc\Sitko.Grpc.Tools.Doc.csproj"/>
   </ItemGroup>
 
 </Project>
