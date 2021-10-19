@@ -22,3 +22,8 @@ jobs:
                     ./download.sh
             -   name: Create package
                 run: dotnet pack -c Release src/Sitko.Grpc.Tools.Doc
+            -   name: Add Github Actions logger
+                run: dotnet add tests/Sitko.Grpc.Tools.Doc.Tests/Sitko.Grpc.Tools.Doc.Tests.csproj package GitHubActionsTestLogger
+            -   name: Run tests
+                run: dotnet test --logger GitHubActions tests/Sitko.Grpc.Tools.Doc.Tests/Sitko.Grpc.Tools.Doc.Tests.csproj
+
