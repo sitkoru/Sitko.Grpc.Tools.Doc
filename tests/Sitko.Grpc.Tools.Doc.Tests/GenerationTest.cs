@@ -156,4 +156,3 @@ namespace Sitko.Grpc.Tools.Doc.Tests
         }
     }
 }
-diff --git a/.github/workflows/main.yml b/.github/workflows/main.yml
