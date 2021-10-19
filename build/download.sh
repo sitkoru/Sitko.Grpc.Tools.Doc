@@ -1,8 +1,8 @@
 #!/bin/sh
 
-export PROTOC_VERSION=3.16.0
-export PROTOC_GEN_DOC_VERSION=1.4.1
-export PROTOC_GEN_DOC_GO_VERSION=1.15.2
+export PROTOC_VERSION=3.18.1
+export PROTOC_GEN_DOC_VERSION=1.5.0
+export PROTOC_GEN_DOC_GO_VERSION=1.16.6
 
 # download win64
 curl -L https://github.com/protocolbuffers/protobuf/releases/download/v${PROTOC_VERSION}/protoc-${PROTOC_VERSION}-win64.zip -o /tmp/protoc-${PROTOC_VERSION}-win64.zip
