@@ -22,7 +22,7 @@
     <None Pack="true" PackagePath="buildTransitive" Include="Build/**/*.xml; Build/**/*.props; Build/**/*.targets;" />
     <None Pack="true" PackagePath="tools" Include="Tools/**/*.*;" />
     <None Pack="true" PackagePath="proto/google/protobuf" Include="Proto/google/protobuf/*.proto;" />
-    <PackageReference Include="Microsoft.Build.Utilities.Core" Version="16.11.0" />
+    <PackageReference Include="Microsoft.Build.Utilities.Core" Version="17.1.0" />
     <PackageReference Include="Microsoft.Build.Framework" Version="16.11.0" />
   </ItemGroup>
 
