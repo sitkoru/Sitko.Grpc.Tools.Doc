@@ -17,7 +17,7 @@ jobs:
                 run: |
                     VERSION=${GITHUB_REF#refs/tags/}
                     echo ::set-output name=version::${VERSION}
-            -   uses: actions/setup-dotnet@v1.8.2
+            -   uses: actions/setup-dotnet@v3.0.3
                 with:
                     dotnet-version: '5.0.x'
             -   name: Download protoc and protoc-doc-gen
